@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <declare-styleable name="Hexgrid">
+        <attr name="radius" format="dimension" />
+        <attr name="max_columns" format="integer" />
+        <attr name="max_rows" format="integer" />
+        <attr name="max_value" format="integer" />
+        <attr name="start_indented" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="CircularTextView">
+        <attr name="StrokeWidth" format="integer" />
+        <attr name="StrokeColor" format="color" />
+        <attr name="SolidColor" format="color" />
+        <attr name="SelectColor" format="color" />
+        <attr name="SelectStrokeColor" format="color" />
+        <attr name="TextSize" format="integer" />
+    </declare-styleable>
+
+</resources>

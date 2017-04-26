@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">CellHexaCalc</string>
+    <string name="action_replay">Finir la partie</string>
+    <string name="action_show_scores">Scores ... </string>
+    <string name="action_settings">Paramètres</string>
+
+</resources>

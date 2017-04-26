@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="86dp"
+    android:layout_gravity="bottom|end"
+    android:paddingBottom="8dp"
+    android:paddingTop="8dp"
+    android:paddingLeft="8dp"
+    android:paddingRight="8dp"
+    android:background="@color/colorBarOperator"
+    app:layout_collapseParallaxMultiplier="0.2">
+
+
+    <com.math.jeux.cellhexacalc.CircularTextView
+        android:id="@+id/operatorPlus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+"
+        android:gravity="center"
+        android:padding="20dp"
+        app:StrokeWidth="4"
+        app:StrokeColor="@color/colorStroke"
+        app:SolidColor="@color/colorSolid"
+        app:SelectColor="@color/colorSelected"
+        app:SelectStrokeColor="@color/colorSelectedStroke"
+        app:TextSize="20"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true" />
+
+    <com.math.jeux.cellhexacalc.CircularTextView
+        android:id="@+id/operatorEqual"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="="
+        android:gravity="fill_horizontal|center"
+        android:padding="20dp"
+        android:onClick="handleClick"
+        app:StrokeColor="@color/colorStroke"
+        app:SolidColor="@color/colorSolid"
+        app:SelectColor="@color/colorSelected"
+        app:SelectStrokeColor="@color/colorSelectedStroke"
+        app:TextSize="20"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+
+    <TextView
+        android:id="@+id/showOperation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="x = x"
+        android:gravity="fill_horizontal|right"
+        android:padding="14dp"
+        android:textSize="28sp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/operatorEqual" />
+
+    <com.math.jeux.cellhexacalc.CircularTextView
+        android:id="@+id/operatorMoins"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="-"
+        android:gravity="center"
+        android:padding="20dp"
+        android:onClick="handleClick"
+        app:StrokeColor="@color/colorStroke"
+        app:SolidColor="@color/colorSolid"
+        app:SelectColor="@color/colorSelected"
+        app:SelectStrokeColor="@color/colorSelectedStroke"
+        app:TextSize="20"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@+id/operatorPlus"
+        android:layout_marginStart="12dp" />
+
+</RelativeLayout>
