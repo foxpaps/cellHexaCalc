@@ -19,6 +19,7 @@ package com.math.jeux.cellhexacalc;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,19 +31,19 @@ public class HexGrid extends ViewGroup {
 	@SuppressWarnings("unused")
 	private static final String TAG = HexGrid.class.getSimpleName();
 	
-	private int r = (int) TypedValue
+	private int radius = (int) TypedValue
 			.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 48, getResources()
 					.getDisplayMetrics());
 	private int wCount;
 	private int hCount;
 	private int widthSegment;
-	private int widthExcess;
-	private int unusedWidth;
-	private int unusedHeight;
 	private int supportedChildern;
 	private boolean startIndented = true;
 	private int maxColumns = Integer.MAX_VALUE;
 	private int maxRows = Integer.MAX_VALUE;
+
+    private int unusableWidth;
+    private int unusableHeight;
 
 	public HexGrid(Context context) {
 		super(context);
@@ -60,10 +61,15 @@ public class HexGrid extends ViewGroup {
 
 	private void init(Context context, AttributeSet attrs) {
 		TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.Hexgrid);
-		r = a.getDimensionPixelOffset(R.styleable.Hexgrid_radius,
+
+        DisplayMetrics display = getResources().getDisplayMetrics();
+                       
+        int dim =   (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,48, display);
+        
+	/*	radius = a.getDimensionPixelOffset(R.styleable.Hexgrid_radius,
 				(int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
 						48, getResources().getDisplayMetrics()));
-
+                                                                          */
 		maxColumns = a.getInteger(R.styleable.Hexgrid_max_columns,
 				Integer.MAX_VALUE);
 		maxRows = a.getInteger(R.styleable.Hexgrid_max_rows, Integer.MAX_VALUE);
@@ -74,65 +80,37 @@ public class HexGrid extends ViewGroup {
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 
-		widthSegment = (int) (Math.sqrt(3) * r)-4;
-		widthExcess = (int) (r / Math.sqrt(3));
+        hCount = 9;
 
 		int width = MeasureSpec.getSize(widthMeasureSpec);
 		int height = MeasureSpec.getSize(heightMeasureSpec);
 
-		int usableWidth = width - (getPaddingLeft() + getPaddingRight())
-				- widthExcess;
+		int usableWidth = width - (getPaddingLeft() + getPaddingRight());
 		int usableHeight = height - (getPaddingTop() + getPaddingBottom());
 
-		wCount = usableWidth / widthSegment;
-		wCount = Math.min(wCount, maxColumns);
+        int radiusWidth = (int) (2*usableWidth /(maxColumns*3));
 
-		hCount = (usableHeight) / (2 * r);
-		hCount = Math.min(hCount, maxRows);
+		int radiusHeight = (int) (usableHeight /(maxRows*2));
 
-		unusedWidth = usableWidth - wCount * widthSegment;
-		unusedHeight = usableHeight - hCount * (2 * r);
+		radius = Math.min(radiusHeight,radiusWidth);
 
-		if (unusedWidth> unusedHeight) {
-			// on va prendre de la hauteur
-			r+=unusedHeight/maxRows-15;
-		} else {
-			// on va prendre de la largeur
-			r+=unusedWidth/maxColumns-15;
-		}
+        unusableWidth = usableWidth - (int)(radius*maxColumns*3/2) -maxColumns*4;
+        unusableHeight = usableHeight - radius*maxRows*2;
+        widthSegment = (int) (1.5 * radius)+3;
 
-
-
-		supportedChildern = wCount * hCount - (wCount / 2);
+		supportedChildern = 68; // = 8*4 + 9*4 = ...maxColumns* maxRows; //wCount * hCount - (wCount / 2);
 //		if (startIndented) {
 //			supportedChildern--;
 //		}
 
 		// Find out how big everyone wants to be
-		//int spec = MeasureSpec.makeMeasureSpec(2 * r, MeasureSpec.EXACTLY);
-		int spec = MeasureSpec.makeMeasureSpec(2 * r, MeasureSpec.AT_MOST);
+		//int spec = MeasureSpec.makeMeasureSpec(2 * r, MeasureSpec.AT_MOST);
+		int spec = MeasureSpec.makeMeasureSpec(2*radius, MeasureSpec.EXACTLY);
 		measureChildren(spec, spec);
-
-/*		width -= unusedWidth;
-		unusedWidth = 0;
-		height -= unusedHeight;
-		unusedHeight = 0;
-*/
-		//adjust for smallest size
-		if (MeasureSpec.getMode(widthMeasureSpec) == MeasureSpec.AT_MOST) {
-			width -= unusedWidth;
-			unusedWidth = 0;
-		}
-
-		//MeasureSpec.makeMeasureSpec(MeasureSpec.AT_MOST);
-
-		if (MeasureSpec.getMode(heightMeasureSpec) == MeasureSpec.AT_MOST) {
-			height -= unusedHeight;
-			unusedHeight = 0;
-		}
 
 		// Check against minimum height and width
 		width = Math.max(width, getSuggestedMinimumWidth());
+		int h = getSuggestedMinimumHeight();
 		height = Math.max(height, getSuggestedMinimumHeight());
 		setMeasuredDimension(resolveSize(width, widthMeasureSpec),
 				resolveSize(height, heightMeasureSpec));
@@ -145,15 +123,13 @@ public class HexGrid extends ViewGroup {
 	}
 
 	@Override
-	protected void onLayout(boolean changed, int left, int top, int right,
-			int bottom) {
+	protected void onLayout(boolean changed, int left, int top, int right,int bottom) {
 		int a;
 		int b;
 		a = b = 0;
 
-		int leftPositionFudge = getPaddingLeft() + (unusedWidth / 2)
-				+ (4 * widthExcess - 2 * r) / 2;
-		int topPositionFudge = getPaddingTop() + (unusedHeight / 2);
+		int leftPositionFudge =  getPaddingLeft() + unusableWidth/2 - radius/3;
+		int topPositionFudge = getPaddingTop() + unusableHeight/2;
 
 		for (int c = 0; c < supportedChildern; c++) {
 			View child = getChildAt(c);
@@ -162,16 +138,15 @@ public class HexGrid extends ViewGroup {
 			}
 			if (child.getVisibility() != GONE) {
 				int childLeft = a * widthSegment + leftPositionFudge;
-				int childTop = b * (int)(2 * (r-2)) + topPositionFudge;
+				int childTop = b * (int)(2 * (radius-1)) + topPositionFudge;
 				if ((a % 2) == 1 ^ startIndented) {
-					childTop += r;
+					childTop += radius;
 				}
 				child.setId(c);
-
+				int mw =child.getMeasuredWidth();
 				child.setOnClickListener(ClickOnCellHexa.getInstance());
-				child.layout(childLeft, childTop,
-						childLeft + child.getMeasuredWidth(),
-						childTop + child.getMeasuredHeight());
+
+				child.layout(childLeft, childTop,childLeft + radius*2,	childTop + radius*2);
 			}
 			b++;
 			if ((a % 2) == 0 ^ startIndented) {

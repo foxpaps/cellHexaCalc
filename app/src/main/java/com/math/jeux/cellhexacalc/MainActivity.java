@@ -85,7 +85,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         TextView opeViewEqual = (TextView)findViewById(R.id.operatorEqual);
         opeViewEqual.setOnClickListener(this);
 
+        /*opeViewPlus.setTextSize(10);
+        opeViewMoins.setTextSize(10);
+        opeViewEqual.setTextSize(10);*/
     }
+
+
 
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
@@ -267,10 +272,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             int val = rangene.nextInt(maxValueCell);
             hexaTextViewTab[i] = new HexaTextView(this, mAttributs, String.valueOf(val));
         }
+        ComputeResult.getInstance().setScore(0);
     }
 
     private void restoreGame(Bundle savedInstanceState) {
-        //ViewGroup grid = (ViewGroup) findViewById(R.id.hexGrid1);
         ArrayList<CharSequence> hexaTextList = savedInstanceState.getCharSequenceArrayList(keyHexaText);
         boolean[] hexaSelectedList = savedInstanceState.getBooleanArray(keyHexaSelected);
         for (int i = 0; i < nbHexaCell; i++) {

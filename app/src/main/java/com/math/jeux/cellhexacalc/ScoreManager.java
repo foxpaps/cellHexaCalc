@@ -112,9 +112,8 @@ public class ScoreManager {
         AlertDialog alertDialog = new AlertDialog.Builder(themeWrapper).create();
         //AlertDialog alertDialog = new AlertDialog.Builder(activity).create();
 
-
         alertDialog.setTitle("Les Meilleurs scores");
-        alertDialog.setMessage("Si tu n'y est pas continu !");
+        alertDialog.setMessage("Si tu n'y es pas continuE !");
 
         TableLayout.LayoutParams lt = new TableLayout.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT,
                 TableLayout.LayoutParams.WRAP_CONTENT);

@@ -66,15 +66,36 @@ public class HexaTextView extends View
         int  h = this.getHeight();
         int  w = this.getWidth();
 
+        int adjust = 2;
+
         int diameter = ((h > w) ? h : w);
         int radius = diameter/2;
 
-        pointO = new Point((int)w/2,(int)h/2);
+        pointO = new Point((int)(w/2),(int)(h/2));
         int cpt = 0;
         for (int i = 0; i<360 ; i+=360/ nbPoints) {
             tabHexaPoint[cpt] = new Point();
             tabHexaPoint[cpt].x = pointO.x + (int)(radius * (float) Math.cos(Math.toRadians(i)));
             tabHexaPoint[cpt].y = pointO.y + (int)(radius * (float) Math.sin(Math.toRadians(i)));
+
+            if (i==60*1) {
+                tabHexaPoint[cpt].x -=adjust;
+                tabHexaPoint[cpt].y +=adjust;
+            }
+            if (i==60*2) {
+                tabHexaPoint[cpt].x +=adjust;
+                tabHexaPoint[cpt].y +=adjust;
+            }
+            if (i==60*4) {
+                tabHexaPoint[cpt].x +=adjust;
+                tabHexaPoint[cpt].y -=adjust;
+            }
+            if (i==60*5) {
+                tabHexaPoint[cpt].x -=adjust;
+                tabHexaPoint[cpt].y -=adjust;
+            }
+
+
             cpt++;
         }
     }

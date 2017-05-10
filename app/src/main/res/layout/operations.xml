@@ -2,17 +2,15 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="86dp"
+    android:layout_height="0dp"
+    android:layout_weight="1"
     android:layout_gravity="bottom|end"
     android:paddingBottom="8dp"
     android:paddingTop="8dp"
     android:paddingLeft="8dp"
     android:paddingRight="8dp"
-    android:background="@color/colorBarOperator"
-    app:layout_collapseParallaxMultiplier="0.2">
-
+    android:background="@color/colorBarOperator">
 
     <com.math.jeux.cellhexacalc.CircularTextView
         android:id="@+id/operatorPlus"
@@ -29,6 +27,23 @@
         app:TextSize="20"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true" />
+
+    <com.math.jeux.cellhexacalc.CircularTextView
+        android:id="@+id/operatorMoins"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="-"
+        android:gravity="center"
+        android:padding="20dp"
+        android:onClick="handleClick"
+        app:StrokeColor="@color/colorStroke"
+        app:SolidColor="@color/colorSolid"
+        app:SelectColor="@color/colorSelected"
+        app:SelectStrokeColor="@color/colorSelectedStroke"
+        app:TextSize="20"
+        android:layout_alignParentBottom="true"
+        android:layout_toEndOf="@+id/operatorPlus"
+        android:layout_marginStart="12dp" />
 
     <com.math.jeux.cellhexacalc.CircularTextView
         android:id="@+id/operatorEqual"
@@ -59,21 +74,6 @@
         android:layout_alignParentEnd="true"
         android:layout_alignTop="@+id/operatorEqual" />
 
-    <com.math.jeux.cellhexacalc.CircularTextView
-        android:id="@+id/operatorMoins"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="-"
-        android:gravity="center"
-        android:padding="20dp"
-        android:onClick="handleClick"
-        app:StrokeColor="@color/colorStroke"
-        app:SolidColor="@color/colorSolid"
-        app:SelectColor="@color/colorSelected"
-        app:SelectStrokeColor="@color/colorSelectedStroke"
-        app:TextSize="20"
-        android:layout_centerVertical="true"
-        android:layout_toEndOf="@+id/operatorPlus"
-        android:layout_marginStart="12dp" />
+
 
 </RelativeLayout>
