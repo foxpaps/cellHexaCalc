@@ -6,60 +6,55 @@
     android:layout_height="0dp"
     android:layout_weight="1"
     android:layout_gravity="bottom|end"
-    android:paddingBottom="8dp"
-    android:paddingTop="8dp"
-    android:paddingLeft="8dp"
-    android:paddingRight="8dp"
+    android:paddingTop="0dp"
+    android:paddingLeft="4dp"
+    android:paddingRight="4dp"
     android:background="@color/colorBarOperator">
 
     <com.math.jeux.cellhexacalc.CircularTextView
         android:id="@+id/operatorPlus"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:text="+"
         android:gravity="center"
-        android:padding="20dp"
-        app:StrokeWidth="4"
         app:StrokeColor="@color/colorStroke"
         app:SolidColor="@color/colorSolid"
         app:SelectColor="@color/colorSelected"
         app:SelectStrokeColor="@color/colorSelectedStroke"
-        app:TextSize="20"
-        android:layout_alignParentBottom="true"
+        app:TextSize="24"
+        android:layout_centerInParent="true"
         android:layout_alignParentStart="true" />
 
     <com.math.jeux.cellhexacalc.CircularTextView
         android:id="@+id/operatorMoins"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:text="-"
         android:gravity="center"
-        android:padding="20dp"
         android:onClick="handleClick"
         app:StrokeColor="@color/colorStroke"
         app:SolidColor="@color/colorSolid"
         app:SelectColor="@color/colorSelected"
         app:SelectStrokeColor="@color/colorSelectedStroke"
-        app:TextSize="20"
-        android:layout_alignParentBottom="true"
+        app:TextSize="24"
+        android:layout_centerInParent="true"
         android:layout_toEndOf="@+id/operatorPlus"
-        android:layout_marginStart="12dp" />
+        android:layout_marginStart="12dp"/>
 
     <com.math.jeux.cellhexacalc.CircularTextView
         android:id="@+id/operatorEqual"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:text="="
-        android:gravity="fill_horizontal|center"
-        android:padding="20dp"
+        android:gravity="center"
         android:onClick="handleClick"
         app:StrokeColor="@color/colorStroke"
         app:SolidColor="@color/colorSolid"
         app:SelectColor="@color/colorSelected"
         app:SelectStrokeColor="@color/colorSelectedStroke"
-        app:TextSize="20"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        app:TextSize="24"
+        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true" />
 
 
     <TextView
@@ -68,12 +63,9 @@
         android:layout_height="wrap_content"
         android:text="x = x"
         android:gravity="fill_horizontal|right"
-        android:padding="14dp"
         android:textSize="28sp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignTop="@+id/operatorEqual" />
-
-
+        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

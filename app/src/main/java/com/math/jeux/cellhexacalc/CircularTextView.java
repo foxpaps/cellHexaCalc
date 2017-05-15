@@ -96,14 +96,16 @@ public class CircularTextView extends TextView
         int  w = this.getWidth();
 
         int diameter = ((h > w) ? h : w);
-        int radius = diameter/2;
+        int radius = diameter/2 -6;
 
         this.setHeight(diameter);
         this.setWidth(diameter);
 
-        canvas.drawCircle(diameter / 2 , diameter / 2, radius,strokePaint);
+        canvas.drawCircle(radius +6+4, radius+3+4, radius,strokePaint);
+        canvas.drawCircle(radius+4, radius+3+4, radius-strokeWidth, circlePaint);
 
-        canvas.drawCircle(diameter / 2, diameter / 2, radius-strokeWidth, circlePaint);
+        //canvas.drawCircle(diameter / 2 , diameter / 2, radius,strokePaint);
+        //canvas.drawCircle(diameter / 2, diameter / 2, radius-strokeWidth, circlePaint);
 
         super.draw(canvas);
     }
