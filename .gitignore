@@ -7,7 +7,6 @@
 /captures
 .externalNativeBuild
 
-*.apk
 *.ap_
 *.dex
 
