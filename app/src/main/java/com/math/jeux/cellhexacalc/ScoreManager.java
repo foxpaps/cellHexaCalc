@@ -107,13 +107,12 @@ public class ScoreManager {
     public void showHighScore(Context activity) {
 
         readHightScore(activity);
-        ContextThemeWrapper themeWrapper = new ContextThemeWrapper(activity, android.R.style.Theme_Dialog);
-        //ContextThemeWrapper themeWrapper = new ContextThemeWrapper(activity, android.R.style.Theme_DeviceDefault_Dialog_Alert);
+        ContextThemeWrapper themeWrapper = android.os.Build.VERSION.SDK_INT >= 21 ?
+                new ContextThemeWrapper(activity, android.R.style.Theme_DeviceDefault_Dialog_Alert) :
+                new ContextThemeWrapper(activity, android.R.style.Theme_Dialog);
         AlertDialog alertDialog = new AlertDialog.Builder(themeWrapper).create();
-        //AlertDialog alertDialog = new AlertDialog.Builder(activity).create();
-
         alertDialog.setTitle("Les Meilleurs scores");
-        alertDialog.setMessage("Si tu n'y es pas continuE !");
+        alertDialog.setMessage("Si tu n'y es pas continue !");
 
         TableLayout.LayoutParams lt = new TableLayout.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT,
                 TableLayout.LayoutParams.WRAP_CONTENT);

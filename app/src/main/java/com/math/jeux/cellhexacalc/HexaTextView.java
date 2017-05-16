@@ -114,6 +114,8 @@ public class HexaTextView extends View
         strokePaint.setFlags(Paint.ANTI_ALIAS_FLAG);
 
         computePoint();
+
+        drawPolygone3d(canvas,tabHexaPoint,strokePaint);
         drawPolygone(canvas,tabHexaPoint,hexaPaint);
 
         Paint textPaint = new Paint();
@@ -141,4 +143,19 @@ public class HexaTextView extends View
         canvas.drawPath(path, paint);
     }
 
+    private void drawPolygone3d(Canvas canvas, Point tabHexaPoint[], Paint paint) {
+
+        paint.setStyle(Paint.Style.FILL_AND_STROKE);
+        paint.setAntiAlias(true);
+
+        Path path = new Path();
+        path.setFillType(Path.FillType.EVEN_ODD);
+
+        path.moveTo(tabHexaPoint[0].x+3,tabHexaPoint[0].y);
+        for (int i = 1 ; i< tabHexaPoint.length; i++) {
+            path.lineTo(tabHexaPoint[i].x+3, tabHexaPoint[i].y);
+        }
+        path.close();
+        canvas.drawPath(path, paint);
+    }
 }
